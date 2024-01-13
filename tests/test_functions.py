@@ -16,24 +16,13 @@ def test_sort_operation_list():
     assert sort_operation_list([{}]) == []
 
 
-def test_report_operation():
-    assert (sort_operation_list([{
-                                "date": "2019-07-12T20:41:47.882230",
-                                "operationAmount": {
-                                  "amount": "51463.70",
-                                  "currency": {"name": "USD"}
-                                },
-                                "description": "Перевод организации",
-                                "from": "Счет 48894435694657014368",
-                                "to": "Счет 38976430693692818358"}]) ==
-                                     ['12.07.2019', 'Перевод организации',
-                                      'Счет **4368', '->', 'Счет **8358',
-                                      '51463.70', 'USD'])
+def test_date_operation():
+    assert date_operation([{"date": "2018-12-28T23:10:35.459698"}]) == '28.12.2018'
 
-    assert (sort_operation_list([{"state": "EXECUTED", 'date': '2019-07-12T20:41:47.882230'}]) ==
-            [{'date': '2019-07-12T20:41:47.882230', 'state': 'EXECUTED'}])
-    assert sort_operation_list([{"state": "EXECUTED", "date": "2019-07-12T20:41:47.882230",
-                                 'to': 'Счет 38976430693692818358'}]) == [{'date': '2019-07-12T20:41:47.882230',
-                                                                           'state': 'EXECUTED',
-                                                                           'to': 'Счет 38976430693692818358'}]
-#
+
+def test_mask_score_number():
+    assert mask_score_number([{"to": "Счет 96231448929365202391"}]) == 'Счет **2391'
+
+
+def test_mask_card_number():
+    assert test_mask_score_number([{"from": "MasterCard 4047671689373225"}]) == 'MasterCard 4047 67** **** 3225'

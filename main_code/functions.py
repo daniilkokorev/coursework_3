@@ -56,13 +56,13 @@ def mask_score_number(operations):
     return mask_score
 
 
-def mask_card_number(operations):
+def mask_card_number(operations_card):
     """
     проверяем наличие ключа 'from' в словаре операции
     :param operations:
     :return:
     """
-    for result_card in operations:
+    for result_card in operations_card:
         if not result_card.get('from'):
             card_number = result_card["to"]
         else:
