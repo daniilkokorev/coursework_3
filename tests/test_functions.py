@@ -17,18 +17,18 @@ def test_sort_operation_list():
 
 
 def test_report_operation():
-    assert sort_operation_list([{"state": "EXECUTED",
+    assert (sort_operation_list([{
                                 "date": "2019-07-12T20:41:47.882230",
                                 "operationAmount": {
                                   "amount": "51463.70",
-                                  "currency": {"name": "USD", "code": "USD"}
+                                  "currency": {"name": "USD"}
                                 },
                                 "description": "Перевод организации",
                                 "from": "Счет 48894435694657014368",
-                                "to": "Счет 38976430693692818358"
-                              }]) == ['12.07.2019 Перевод организации '
-                                      'Счет **4368 -> Счет **8358'
-                                      '51463.70 USD']
+                                "to": "Счет 38976430693692818358"}]) ==
+                                     ['12.07.2019', 'Перевод организации',
+                                      'Счет **4368', '->', 'Счет **8358',
+                                      '51463.70', 'USD'])
 
     assert (sort_operation_list([{"state": "EXECUTED", 'date': '2019-07-12T20:41:47.882230'}]) ==
             [{'date': '2019-07-12T20:41:47.882230', 'state': 'EXECUTED'}])
