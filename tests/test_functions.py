@@ -25,4 +25,4 @@ def test_mask_score_number():
 
 
 def test_mask_card_number():
-    assert test_mask_score_number([{"from": "MasterCard 4047671689373225"}]) == 'MasterCard 4047 67** **** 3225'
+    assert mask_card_number([{"from": "MasterCard 4047671689373225"}]) == 'MasterCard 4047 16** **** 3225'
