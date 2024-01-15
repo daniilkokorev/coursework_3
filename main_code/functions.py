@@ -36,11 +36,13 @@ def date_operation(operations):
     """
     Функция форматируем дату операции:
     """
+    data_lists = []
     for result_oper in operations:
         # форматируем дату операции
         date_obj = datetime.fromisoformat(result_oper['date'].replace('T', ' '))
         formatted_date = date_obj.strftime("%d.%m.%Y")
-    return formatted_date
+        data_lists.append(formatted_date)
+    return data_lists
 
 
 def mask_score_number(operations):
@@ -49,11 +51,13 @@ def mask_score_number(operations):
     :param operations:
     :return:
     """
+    score_lists = []
     for result_score in operations:
         # зашифровываем номер счёта
         number_score = result_score["to"]
         mask_score = f'{number_score[:4]} **{number_score[-4:]}'
-    return mask_score
+        score_lists.append(mask_score)
+    return score_lists
 
 
 def mask_card_number(operations_card):
@@ -62,14 +66,17 @@ def mask_card_number(operations_card):
     :param operations:
     :return:
     """
+    card_masc_list = []
     for result_card in operations_card:
         if not result_card.get('from'):
-            card_number = result_card["to"]
+            card_number = result_card['to']
         else:
             card_number = result_card["from"]
         # проверяем чем передставлен счёт карты и шифруем его
         if card_number[0] == "С":
             mask_card = f'{card_number[:4]} **{card_number[-4:]}'
+            card_masc_list.append(mask_card)
         else:
             mask_card = f'{card_number[:-12]} {card_number[-10:-8]}** **** {card_number[-4:]}'
-    return mask_card
+            card_masc_list.append(mask_card)
+    return card_masc_list
